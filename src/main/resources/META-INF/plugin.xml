@@ -1,0 +1,62 @@
+<idea-plugin>
+    <id>com.jakubjirak.licenselens</id>
+    <name>Dependency License Lens</name>
+    <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+
+    <description><![CDATA[
+    <h2>Dependency License Lens</h2>
+    <p>Shows license information for project dependencies directly in the IDE. Parses build files
+    (Gradle, Maven, npm), resolves license info, and provides a compliance dashboard.
+    Flags potentially problematic licenses (GPL in commercial projects, etc.).</p>
+
+    <h3>Features</h3>
+    <ul>
+        <li><b>License scanning</b> — automatically detect licenses for all dependencies</li>
+        <li><b>Risk indicators</b> — 🟢 permissive, 🟡 weak copyleft, 🔴 strong copyleft</li>
+        <li><b>Compliance dashboard</b> — overview of all dependencies and their licenses</li>
+        <li><b>Policy enforcement</b> — block problematic licenses (e.g., GPL in commercial projects)</li>
+        <li><b>Multi-format</b> — supports Gradle, Maven, and npm build files</li>
+    </ul>
+
+    <h3>Freemium</h3>
+    <p>Free: scan and view licenses. Paid: custom policies, export, CI integration.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Tool window -->
+        <toolWindow
+                id="License Lens"
+                anchor="bottom"
+                factoryClass="com.jakubjirak.licenselens.ui.LicenseLensToolWindowFactory"
+                icon="/icons/licenseLens13.svg"/>
+
+        <!-- Settings page -->
+        <applicationConfigurable
+                id="com.jakubjirak.licenselens.settings"
+                parentId="tools"
+                displayName="Dependency License Lens"
+                instance="com.jakubjirak.licenselens.settings.LicenseLensConfigurable"/>
+
+        <!-- Persistent settings -->
+        <applicationService
+                serviceImplementation="com.jakubjirak.licenselens.settings.LicenseLensSettings"/>
+
+        <!-- Notification group -->
+        <notificationGroup
+                id="License Lens"
+                displayType="BALLOON"
+                toolWindowId="License Lens"/>
+    </extensions>
+
+    <actions>
+        <action id="com.jakubjirak.licenselens.ScanAction"
+                class="com.jakubjirak.licenselens.ui.ScanDependenciesAction"
+                text="Scan Dependency Licenses"
+                description="Scan project dependencies for license information"
+                icon="/icons/licenseLens16.svg">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
