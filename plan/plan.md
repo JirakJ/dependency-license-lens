@@ -230,6 +230,50 @@
 - [ ] Marketplace listing
 - [ ] Git tag `v2026.2.1`
 
+## Fáze 13: Git Enhancement — License Change Detection per Commit
+
+- [ ] `LicenseChangeEvent` datový model (commit, dependency, change type, previous/new license)
+  - [ ] `LicenseChangeType` enum: DEPENDENCY_ADDED, DEPENDENCY_REMOVED, VERSION_CHANGED, LICENSE_CHANGED
+- [ ] Sledování git diff na build/lock souborech
+  - [ ] Monitorované soubory: `build.gradle.kts`, `pom.xml`, `package-lock.json`, `requirements.txt`, atd.
+  - [ ] `GitHistoryUtils.history()` pro commity měnící build soubory
+  - [ ] Parsování diff pro extrakci přidaných/odebraných dependencies
+- [ ] Notifikace při licenční změně (dependency X: MIT → GPL-3.0)
+- [ ] Timeline view: chronologický přehled licenčních změn
+- [ ] VCS Log highlight: ikona ⚖️ u commitů s licenčními změnami
+- [ ] Unit testy
+
+## Fáze 14: Git Enhancement — Pre-Commit Hook
+
+- [ ] `PreCommitHookGenerator.kt` — generátor shell scriptu
+  - [ ] Hook kontroluje staged build/lock soubory na nové dependencies
+  - [ ] License resolution a ověření proti allowed/denied listu
+  - [ ] Cross-platform kompatibilita (bash/zsh, macOS/Linux/Windows Git Bash)
+- [ ] `PreCommitCheckResult` datový model (passed, blocked dependencies, warnings)
+  - [ ] `BlockedDependency` — dependency, licence, důvod blokace
+- [ ] IDE action „Install Pre-Commit Hook"
+  - [ ] Dialog pro konfiguraci (allowed/denied lists)
+  - [ ] Instalace do `.git/hooks/pre-commit`
+- [ ] Bypass: `--no-verify` nebo `SKIP_LICENSE_CHECK=1`
+- [ ] Hook template v `src/main/resources/hooks/`
+- [ ] Unit testy
+
+## Fáze 15: Git Enhancement — PR License Audit
+
+- [ ] `PrLicenseAudit` datový model (source/target branch, status, added/removed/changed dependencies)
+  - [ ] `AuditStatus` enum: PASS, WARNING, FAIL
+  - [ ] `AuditedDependency` — dependency s licencí a compliance statusem
+  - [ ] `DependencyVersionChange` — detekce licenční změny při version bump
+- [ ] Action „Generate PR License Audit" (na non-main branches)
+  - [ ] Porovnání dependency stavu: aktuální branch vs. base branch
+  - [ ] `git show origin/main:<file>` pro baseline build soubor
+  - [ ] Parsování obou verzí přes `BuildSystemAdapter`
+- [ ] Report formáty: Markdown, HTML, JSON
+  - [ ] Copy-to-clipboard pro PR description
+  - [ ] Auto-update při novém commitu (`GitRepositoryChangeListener`)
+- [ ] Compliance status: ✅ PASS, ⚠️ WARNING, ❌ FAIL
+- [ ] Unit testy
+
 ---
 
 ## Budoucí fáze (Paid)
