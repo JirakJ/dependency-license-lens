@@ -1,0 +1,7 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Git-enhanced services, available only when Git4Idea is present -->
+        <checkinHandlerFactory
+                implementation="com.jakubjirak.licenselens.git.LicenseCheckinHandlerFactory"/>
+    </extensions>
+</idea-plugin>
