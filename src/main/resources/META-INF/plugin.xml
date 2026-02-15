@@ -5,23 +5,35 @@
     <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
     <description><![CDATA[
-    <h2>Dependency License Lens</h2>
-    <p>Shows license information for project dependencies directly in the IDE. Parses build files
-    (Gradle, Maven, npm), resolves license info, and provides a compliance dashboard.
-    Flags potentially problematic licenses (GPL in commercial projects, etc.).</p>
+<h2>Dependency License Lens</h2>
+<p>
+  License compliance shouldn't be an afterthought. Dependency License Lens automatically detects and
+  categorizes the license of every dependency in your project, flags risks, and enforces team policies —
+  all without leaving your IDE.
+</p>
 
-    <h3>Features</h3>
-    <ul>
-        <li><b>License scanning</b> — automatically detect licenses for all dependencies</li>
-        <li><b>Risk indicators</b> — 🟢 permissive, 🟡 weak copyleft, 🔴 strong copyleft</li>
-        <li><b>Compliance dashboard</b> — overview of all dependencies and their licenses</li>
-        <li><b>Policy enforcement</b> — block problematic licenses (e.g., GPL in commercial projects)</li>
-        <li><b>Multi-format</b> — supports Gradle, Maven, and npm build files</li>
-    </ul>
+<h2>Key Features</h2>
+<ul>
+  <li><b>Automatic License Detection</b> — Scans Gradle, Maven, and npm dependencies</li>
+  <li><b>Risk Categorization</b> — Classifies licenses as permissive, weak copyleft, or strong copyleft</li>
+  <li><b>Compliance Dashboard</b> — Project-wide view of all dependency licenses with risk indicators</li>
+  <li><b>Policy Enforcement</b> — Define allowed/blocked licenses per project or organization</li>
+  <li><b>Inline Warnings</b> — Editor annotations for dependencies with risky or unknown licenses</li>
+  <li><b>Transitive Dependencies</b> — Traces license obligations through the entire dependency tree</li>
+</ul>
 
-    <h3>Freemium</h3>
-    <p>Free: scan and view licenses. Paid: custom policies, export, CI integration.</p>
-    ]]></description>
+<h2>Why Dependency License Lens?</h2>
+<p>
+  A single GPL dependency can change the licensing obligations of your entire product. Catch license
+  issues at development time — not during legal review before a release.
+</p>
+
+<h2>Free vs Pro</h2>
+<ul>
+  <li><b>Free:</b> License scanning, risk categorization, inline warnings for direct dependencies</li>
+  <li><b>Pro:</b> Transitive dependency analysis, custom license policies, SBOM export (SPDX/CycloneDX), CI/CD policy gates, and team compliance dashboards</li>
+</ul>
+]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git-features.xml">Git4Idea</depends>
