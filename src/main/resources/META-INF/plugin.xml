@@ -2,38 +2,47 @@
     <id>com.jakubjirak.licenselens</id>
     <product-descriptor code="PLICENSELENS" release-date="20260215" release-version="20262" optional="true"/>
     <name>Dependency License Lens</name>
-    <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+    <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
     <description><![CDATA[
-<h2>Dependency License Lens</h2>
-<p>
-  License compliance shouldn't be an afterthought. Dependency License Lens automatically detects and
-  categorizes the license of every dependency in your project, flags risks, and enforces team policies —
-  all without leaving your IDE.
-</p>
+<h2>Dependency License Lens — Know Your Licenses Before They Become Legal Problems</h2>
 
-<h2>Key Features</h2>
+<p>Scan your project dependencies for license information and identify compliance risks directly in your IDE. 
+See license types inline in build files, detect conflicts, and ensure your dependency stack is legally safe.</p>
+
+<h3>Core Features</h3>
 <ul>
-  <li><b>Automatic License Detection</b> — Scans Gradle, Maven, and npm dependencies</li>
-  <li><b>Risk Categorization</b> — Classifies licenses as permissive, weak copyleft, or strong copyleft</li>
-  <li><b>Compliance Dashboard</b> — Project-wide view of all dependency licenses with risk indicators</li>
-  <li><b>Policy Enforcement</b> — Define allowed/blocked licenses per project or organization</li>
-  <li><b>Inline Warnings</b> — Editor annotations for dependencies with risky or unknown licenses</li>
-  <li><b>Transitive Dependencies</b> — Traces license obligations through the entire dependency tree</li>
+    <li><b>License Detection</b> — Automatically resolves licenses from Maven Central metadata</li>
+    <li><b>Inline Hints</b> — License type shown next to each dependency in build files</li>
+    <li><b>Risk Levels</b> — Color-coded: 🟢 Permissive, 🟡 Weak Copyleft, 🔴 Strong Copyleft</li>
+    <li><b>Conflict Detection</b> — Flags incompatible license combinations</li>
+    <li><b>Compliance Dashboard</b> — All dependencies grouped by license and risk level</li>
+    <li><b>Build System Support</b> — Gradle (Kotlin + Groovy) and Maven</li>
 </ul>
 
-<h2>Why Dependency License Lens?</h2>
-<p>
-  A single GPL dependency can change the licensing obligations of your entire product. Catch license
-  issues at development time — not during legal review before a release.
-</p>
-
-<h2>Free vs Pro</h2>
+<h3>Pro Features ($3.90/month)</h3>
 <ul>
-  <li><b>Free:</b> License scanning, risk categorization, inline warnings for direct dependencies</li>
-  <li><b>Pro:</b> Transitive dependency analysis, custom license policies, SBOM export (SPDX/CycloneDX), CI/CD policy gates, and team compliance dashboards</li>
+    <li>Unlimited dependencies (free limited to 50)</li>
+    <li>npm/yarn/pnpm, pip/poetry, Go modules support</li>
+    <li>SBOM export (SPDX and CycloneDX)</li>
+    <li>Policy enforcement with allowed/denied lists</li>
+    <li>Transitive dependency analysis</li>
+    <li>CI integration with SARIF output</li>
 </ul>
-]]></description>
+
+<h3>Requirements</h3>
+<ul>
+    <li>IntelliJ IDEA 2024.1+ (or any JetBrains IDE)</li>
+    <li>Project with Gradle or Maven build files</li>
+</ul>
+
+<h3>Support</h3>
+<p>
+    <a href="https://github.com/JirakJ/dependency-license-lens/issues">Documentation</a> |
+    <a href="https://github.com/JirakJ/dependency-license-lens/issues">Issue Tracker</a> |
+    <a href="https://github.com/JirakJ/dependency-license-lens/issues">Contact Support</a>
+</p>
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git-features.xml">Git4Idea</depends>
@@ -73,4 +82,20 @@
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>
+
+    <change-notes><![CDATA[
+        <h3>What's New</h3>
+        <ul>
+            <li><b>Automatic License Scanning</b> - Detects licenses for all project dependencies from Maven Central metadata</li>
+            <li><b>Inline License Hints</b> - Shows license type directly in build files (Gradle, Maven, npm)</li>
+            <li><b>Risk Indicators</b> - Color-coded risk levels: green (permissive), yellow (weak copyleft), red (strong copyleft)</li>
+            <li><b>Conflict Detection</b> - Identifies incompatible license combinations in your dependency tree</li>
+            <li><b>Compliance Dashboard</b> - Tool window showing all dependencies grouped by license and risk level</li>
+            <li><b>Gutter Icons</b> - Visual markers for dependencies with license warnings or conflicts</li>
+            <li><b>Local Caching</b> - Caches resolved licenses locally for fast subsequent scans</li>
+            <li><b>SBOM Export (Pro)</b> - Generate SPDX and CycloneDX software bill of materials</li>
+            <li><b>Policy Enforcement (Pro)</b> - Define allowed, denied, and review-required license lists</li>
+            <li><b>Transitive Analysis (Pro)</b> - Traces license obligations through the entire dependency tree</li>
+        </ul>
+    ]]></change-notes>
 </idea-plugin>
