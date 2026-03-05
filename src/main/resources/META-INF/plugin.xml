@@ -4,13 +4,12 @@
     <name>Dependency License Lens</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
-    <description><![CDATA[
-<h2>Dependency License Lens — Know Your Licenses Before They Become Legal Problems</h2>
+    <description><![CDATA[<h2>Dependency License Lens — Know Your Licenses Before They Become Legal Problems</h2>
 
 <p>Scan your project dependencies for license information and identify compliance risks directly in your IDE. 
 See license types inline in build files, detect conflicts, and ensure your dependency stack is legally safe.</p>
 
-<h3>Core Features</h3>
+<h3>Features</h3>
 <ul>
     <li><b>License Detection</b> — Automatically resolves licenses from Maven Central metadata</li>
     <li><b>Inline Hints</b> — License type shown next to each dependency in build files</li>
@@ -20,7 +19,6 @@ See license types inline in build files, detect conflicts, and ensure your depen
     <li><b>Build System Support</b> — Gradle (Kotlin + Groovy) and Maven</li>
 </ul>
 
-<h3>Pro Features ($3.90/month)</h3>
 <ul>
     <li>Unlimited dependencies (free limited to 50)</li>
     <li>npm/yarn/pnpm, pip/poetry, Go modules support</li>
@@ -41,8 +39,7 @@ See license types inline in build files, detect conflicts, and ensure your depen
     <a href="https://github.com/JirakJ/dependency-license-lens/issues">Documentation</a> |
     <a href="https://github.com/JirakJ/dependency-license-lens/issues">Issue Tracker</a> |
     <a href="https://github.com/JirakJ/dependency-license-lens/issues">Contact Support</a>
-</p>
-    ]]></description>
+</p>]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git-features.xml">Git4Idea</depends>
@@ -71,6 +68,9 @@ See license types inline in build files, detect conflicts, and ensure your depen
                 id="License Lens"
                 displayType="BALLOON"
                 toolWindowId="License Lens"/>
+    
+        <notificationGroup id="Dependency License Lens Feedback" displayType="BALLOON"/>
+        <projectActivity implementation="com.jakubjirak.licenselens.feedback.FeedbackNotifier"/>
     </extensions>
 
     <actions>
