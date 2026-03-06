@@ -1,6 +1,5 @@
 package com.jakubjirak.licenselens.ui
 
-import com.jakubjirak.licenselens.licensing.FreemiumGate
 import com.jakubjirak.licenselens.model.ComplianceReport
 import com.jakubjirak.licenselens.model.ComplianceSummary
 import com.jakubjirak.licenselens.model.LicenseCategory
@@ -105,11 +104,7 @@ class LicenseLensPanel(private val project: Project) : JPanel(BorderLayout()) {
             }
         }
 
-        val freemiumGate = FreemiumGate.getInstance()
-        val maxDeps = freemiumGate.getMaxFreeDependencies()
-        val limited = if (allDependencies.size > maxDeps) allDependencies.take(maxDeps) else allDependencies
-
-        val resolved = resolver.resolveAll(limited, policy)
+        val resolved = resolver.resolveAll(allDependencies, policy)
         val issues = policy.evaluate(resolved)
         val report = ComplianceReport(
             resolvedDependencies = resolved,

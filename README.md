@@ -8,18 +8,13 @@
 
 ## ✨ Features
 
-### Free Tier
-- **License scanning** — automatically detect licenses for all dependencies (max 50)
+- **License scanning** — automatically detect licenses for all dependencies
 - **Inline license hints** — see license type directly in Gradle/Maven build files
 - **Risk indicators** — 🟢 Permissive (MIT, Apache), 🟡 Weak copyleft (LGPL, MPL), 🔴 Strong copyleft (GPL, AGPL)
 - **Gutter icons** — visual indicator for dependencies with license issues
-- **Basic conflict detection** — detect incompatible licenses (e.g., GPL dependency in an Apache project)
-- **Build file support** — Gradle (Kotlin DSL + Groovy) and Maven
+- **Conflict detection** — detect incompatible licenses (e.g., GPL dependency in an Apache project)
+- **Build file support** — Gradle (Kotlin DSL + Groovy), Maven, npm/yarn/pnpm, pip/poetry, Go modules
 - **License resolution** — from Maven Central POM metadata with local caching
-
-### Pro Tier ($3.90/month)
-- **Unlimited dependencies** — no 50-dependency cap
-- **All build systems** — npm/yarn/pnpm, pip/poetry, Go modules
 - **Full SPDX license database** — complete license identification
 - **Compliance dashboard** — tool window with overview of all dependencies and their licenses
 - **License filtering** — filter by license type, risk level, or module
@@ -83,7 +78,7 @@ Create a `.license-lens.yaml` in your repository root for shared team settings. 
 ### Compliance Dashboard
 - Open the **License Lens** tool window from the bottom panel
 - View all dependencies grouped by license type and risk level
-- Export SBOM in SPDX or CycloneDX format (Pro)
+- Export SBOM in SPDX or CycloneDX format
 
 ## 🔌 Actions
 
