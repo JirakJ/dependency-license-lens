@@ -1,6 +1,5 @@
 <idea-plugin>
     <id>com.jakubjirak.licenselens</id>
-    <product-descriptor code="PLICENSELENS" release-date="20260215" release-version="20262" optional="true"/>
     <name>Dependency License Lens</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
@@ -20,7 +19,7 @@ See license types inline in build files, detect conflicts, and ensure your depen
 </ul>
 
 <ul>
-    <li>Unlimited dependencies (free limited to 50)</li>
+    <li>Unlimited dependencies</li>
     <li>npm/yarn/pnpm, pip/poetry, Go modules support</li>
     <li>SBOM export (SPDX and CycloneDX)</li>
     <li>Policy enforcement with allowed/denied lists</li>
@@ -93,9 +92,9 @@ See license types inline in build files, detect conflicts, and ensure your depen
             <li><b>Compliance Dashboard</b> - Tool window showing all dependencies grouped by license and risk level</li>
             <li><b>Gutter Icons</b> - Visual markers for dependencies with license warnings or conflicts</li>
             <li><b>Local Caching</b> - Caches resolved licenses locally for fast subsequent scans</li>
-            <li><b>SBOM Export (Pro)</b> - Generate SPDX and CycloneDX software bill of materials</li>
-            <li><b>Policy Enforcement (Pro)</b> - Define allowed, denied, and review-required license lists</li>
-            <li><b>Transitive Analysis (Pro)</b> - Traces license obligations through the entire dependency tree</li>
+            <li><b>SBOM Export</b> - Generate SPDX and CycloneDX software bill of materials</li>
+            <li><b>Policy Enforcement</b> - Define allowed, denied, and review-required license lists</li>
+            <li><b>Transitive Analysis</b> - Traces license obligations through the entire dependency tree</li>
         </ul>
     ]]></change-notes>
 </idea-plugin>

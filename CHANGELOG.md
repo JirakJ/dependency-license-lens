@@ -38,12 +38,12 @@
 - `.license-lens.yaml` support for team-shared configuration
 - Scan Dependency Licenses action (Tools menu)
 - License Lens tool window with compliance overview
-- Unlimited dependencies support (Pro)
-- All build systems: npm/yarn/pnpm, pip/poetry, Go modules (Pro)
-- Full SPDX license database (Pro)
-- Compliance dashboard with filtering by license type, risk, and module (Pro)
-- SBOM export in SPDX and CycloneDX formats (Pro)
-- License policy definitions: allowed/denied/review-required (Pro)
-- CI integration with Gradle task (Pro)
-- SARIF output for GitHub Code Scanning (Pro)
-- HTML report for legal review (Pro)
+- Unlimited dependencies support
+- All build systems: npm/yarn/pnpm, pip/poetry, Go modules
+- Full SPDX license database
+- Compliance dashboard with filtering by license type, risk, and module
+- SBOM export in SPDX and CycloneDX formats
+- License policy definitions: allowed/denied/review-required
+- CI integration with Gradle task
+- SARIF output for GitHub Code Scanning
+- HTML report for legal review
