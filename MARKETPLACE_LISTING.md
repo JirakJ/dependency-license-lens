@@ -34,9 +34,9 @@ _(185 characters)_
 
 ### ✨ Key Features
 
-#### 🆓 Free — Instant License Visibility
+#### Instant License Visibility
 
-- 🔍 **License Scanning** — Automatically resolves licenses for up to 50 dependencies
+- 🔍 **License Scanning** — Automatically resolves licenses for all dependencies
 - 📝 **Inline License Hints** — See license info right in your `build.gradle.kts`, `build.gradle`, or `pom.xml`
 - 🚦 **Risk Indicators** — Color-coded at a glance:
   - 🟢 Permissive (MIT, Apache-2.0, BSD)
@@ -47,9 +47,9 @@ _(185 characters)_
 - 🏗️ **Build System Support** — Gradle (Kotlin DSL + Groovy) and Maven
 - 📦 **Maven Central Resolution** — Reads POM metadata with local caching for speed
 
-#### 💎 Pro — $3.90/month
+#### Advanced Compliance
 
-- ♾️ **Unlimited Dependencies** — No 50-dependency cap
+- ♾️ **Unlimited Dependencies** — No dependency cap
 - 🌐 **All Build Systems** — npm/yarn/pnpm, pip/poetry, Go modules (in addition to Gradle/Maven)
 - 📚 **Full SPDX Database** — Complete license identification coverage
 - 📊 **Compliance Dashboard** — Dedicated tool window with overview of all dependencies and their licenses
@@ -62,12 +62,9 @@ _(185 characters)_
 
 ---
 
-### 💰 Pricing Model
+### 💰 Pricing
 
-| Tier     | Price       | Highlights                                              |
-|----------|-------------|---------------------------------------------------------|
-| **Free** | $0          | 50 dependencies, inline hints, risk indicators, Gradle/Maven, conflict detection |
-| **Pro**  | $3.90/month | Unlimited deps, all build systems, SPDX, SBOM export, policy enforcement, CI integration |
+Free & open source (Apache-2.0) — every feature is available to everyone, no license needed.
 
 ---
 
@@ -106,11 +103,11 @@ _(185 characters)_
 | 1  | **Inline license hints** — `build.gradle.kts` file showing license names and risk colors next to each dependency declaration |
 | 2  | **Gutter icons in build file** — 🟢🟡🔴 risk indicators in the gutter of a Gradle file |
 | 3  | **License conflict warning** — Editor highlighting an incompatible license combination with a warning tooltip |
-| 4  | **Compliance dashboard** — Tool window listing all dependencies with license, risk level, and status columns (Pro) |
-| 5  | **SBOM export dialog** — Export options showing SPDX and CycloneDX format selection (Pro) |
+| 4  | **Compliance dashboard** — Tool window listing all dependencies with license, risk level, and status columns |
+| 5  | **SBOM export dialog** — Export options showing SPDX and CycloneDX format selection |
 | 6  | **Settings panel** — Configuration page with blocked license list, commercial project toggle, and team config path |
-| 7  | **CI integration terminal** — Output of `./gradlew licenseLens --policy=strict` with violation details (Pro) |
-| 8  | **HTML report preview** — Styled license audit report suitable for legal review (Pro) |
+| 7  | **CI integration terminal** — Output of `./gradlew licenseLens --policy=strict` with violation details |
+| 8  | **HTML report preview** — Styled license audit report suitable for legal review |
 
 ---
 
@@ -169,9 +166,6 @@ _(185 characters)_
 - [ ] Screenshots are high-resolution (1280×800 or higher), PNG format
 - [ ] Plugin ID matches `gradle.properties` and `plugin.xml`
 - [ ] `plugin.xml` vendor email and URL are correct
-- [ ] Pricing tiers configured in JetBrains Marketplace seller dashboard
-- [ ] Product code `PLICENSELENS` is registered
-- [ ] License agreement / EULA uploaded
 - [ ] Compatibility range tested on minimum supported IDE version (2024.3)
 - [ ] Plugin verified with Plugin Verifier (`runPluginVerifier` Gradle task)
 - [ ] CHANGELOG.md is up to date for the release version

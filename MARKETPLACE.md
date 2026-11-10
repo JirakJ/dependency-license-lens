@@ -32,47 +32,21 @@ conflicts with your project license, and generates compliance reports — all wi
     <li><b>Automatic Project License Detection</b> — reads your root LICENSE file to check compatibility</li>
     <li><b>Quick-Fix: Replace with Compatible Alternative</b> — suggests swap-in dependencies with permissive licenses</li>
     <li><b>Per-Dependency Suppression</b> — <code>// license-lens:ignore</code> comments</li>
-    <li><b>Unlimited Dependencies (Pro)</b> — free tier scans up to 50; Pro removes the cap</li>
-    <li><b>All Build Systems (Pro)</b> — npm/yarn/pnpm, pip/poetry, and Go modules alongside Gradle and Maven</li>
-    <li><b>Full SPDX Database (Pro)</b> — resolve any SPDX-listed license identifier</li>
-    <li><b>Compliance Dashboard (Pro)</b> — tool window with filtering by license type, risk level, or module</li>
-    <li><b>SBOM Export (Pro)</b> — generate SPDX and CycloneDX Software Bill of Materials</li>
-    <li><b>License Policy Enforcement (Pro)</b> — define allowed, denied, and review-required licenses</li>
-    <li><b>CI Integration (Pro)</b> — <code>./gradlew licenseLens --policy=strict --fail-on-violation</code></li>
-    <li><b>SARIF Output (Pro)</b> — integrate with GitHub Code Scanning</li>
-    <li><b>HTML Report (Pro)</b> — polished report ready for legal review</li>
-    <li><b>Centralized Policy Management (Team)</b> — share license policies across all team members</li>
-    <li><b>Team Compliance Reports (Team)</b> — aggregate compliance status across projects</li>
+    <li><b>Unlimited Dependencies</b> — no dependency cap</li>
+    <li><b>All Build Systems</b> — npm/yarn/pnpm, pip/poetry, and Go modules alongside Gradle and Maven</li>
+    <li><b>Full SPDX Database</b> — resolve any SPDX-listed license identifier</li>
+    <li><b>Compliance Dashboard</b> — tool window with filtering by license type, risk level, or module</li>
+    <li><b>SBOM Export</b> — generate SPDX and CycloneDX Software Bill of Materials</li>
+    <li><b>License Policy Enforcement</b> — define allowed, denied, and review-required licenses</li>
+    <li><b>CI Integration</b> — <code>./gradlew licenseLens --policy=strict --fail-on-violation</code></li>
+    <li><b>SARIF Output</b> — integrate with GitHub Code Scanning</li>
+    <li><b>HTML Report</b> — polished report ready for legal review</li>
+    <li><b>Centralized Policy Management</b> — share license policies across all team members</li>
+    <li><b>Team Compliance Reports</b> — aggregate compliance status across projects</li>
 </ul>
 
-<h3>Free Tier</h3>
-<ul>
-    <li>Inline license hints for up to 50 dependencies</li>
-    <li>Gradle (Kotlin DSL + Groovy) and Maven support</li>
-    <li>Risk indicators (🟢🟡🔴) and gutter icons</li>
-    <li>Basic conflict detection</li>
-    <li>Quick-fix: replace with compatible alternative</li>
-    <li>Per-dependency suppression</li>
-</ul>
-
-<h3>Pro Tier ($3.90/month)</h3>
-<ul>
-    <li>Unlimited dependencies</li>
-    <li>All build systems: npm, yarn, pnpm, pip, poetry, Go modules</li>
-    <li>Full SPDX license database</li>
-    <li>Compliance dashboard with advanced filtering</li>
-    <li>SBOM export (SPDX and CycloneDX formats)</li>
-    <li>License policy enforcement (allowed/denied/review-required)</li>
-    <li>CI integration with SARIF output</li>
-    <li>HTML report for legal review</li>
-</ul>
-
-<h3>Team Tier ($7.90/user/month)</h3>
-<ul>
-    <li>All Pro features</li>
-    <li>Centralized license policy management</li>
-    <li>Team-wide compliance reports</li>
-</ul>
+<h3>Free &amp; Open Source</h3>
+<p>Every feature is free for everyone — no license, no tiers. Source code: <a href="https://github.com/JirakJ/dependency-license-lens">GitHub</a> (Apache-2.0).</p>
 
 <h3>Getting Started</h3>
 <ol>
@@ -83,7 +57,7 @@ conflicts with your project license, and generates compliance reports — all wi
 
 <h3>Compatibility</h3>
 <p>IntelliJ IDEA 2024.3+ and all compatible JetBrains IDEs. Requires Java 17+. Supports Gradle, Maven,
-npm/yarn/pnpm (Pro), pip/poetry (Pro), and Go modules (Pro).</p>
+npm/yarn/pnpm, pip/poetry, and Go modules.</p>
 
 <h3>Part of Developer Productivity Suite</h3>
 <p>Dependency License Lens helps you ship with confidence, ensuring every dependency in your project
@@ -100,11 +74,7 @@ Build & DevOps
 
 ## Pricing
 
-| Tier | Price | Features |
-|------|-------|----------|
-| Free | $0 | Inline hints (50 deps), Gradle/Maven, risk indicators, basic conflict detection, quick-fix |
-| Pro | $3.90/month or $39/year | Unlimited deps, all build systems, SPDX database, compliance dashboard, SBOM export, CI integration |
-| Team | $7.90/user/month | All Pro + centralized policy management, team compliance reports |
+Free & open source (Apache-2.0) — every feature is available to everyone, no license needed.
 
 ## Screenshots Needed
 
