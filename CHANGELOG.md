@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2026.9.0] - 2026-11-11
+
 ### Fixed
 - The pre-commit check now actually inspects committed build files and asks before committing a dependency whose license is blocked by the policy (it previously always allowed the commit).
 - **Tools → Scan Dependency Licenses** now runs a scan instead of only opening the tool window.
