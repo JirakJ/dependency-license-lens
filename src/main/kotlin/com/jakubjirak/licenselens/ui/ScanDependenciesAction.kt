@@ -1,24 +1,25 @@
 package com.jakubjirak.licenselens.ui
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.ActionUpdateThread
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.wm.ToolWindowManager
 
 /**
- * Action to trigger a dependency license scan and show the tool window.
+ * Opens the License Lens tool window and runs a dependency license scan.
  */
 class ScanDependenciesAction : AnAction() {
     override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
 
-
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
-        val toolWindow = ToolWindowManager.getInstance(project).getToolWindow("License Lens")
-        if (toolWindow != null) {
-            toolWindow.show()
-            LOG.info("License Lens tool window opened")
+        val toolWindow = ToolWindowManager.getInstance(project).getToolWindow(TOOL_WINDOW_ID) ?: return
+        toolWindow.show {
+            toolWindow.contentManager.contents
+                .map { it.component }
+                .filterIsInstance<LicenseLensPanel>()
+                .firstOrNull()
+                ?.scanDependencies()
         }
     }
 
@@ -26,7 +27,7 @@ class ScanDependenciesAction : AnAction() {
         e.presentation.isEnabledAndVisible = e.project != null
     }
 
-    companion object {
-        private val LOG = Logger.getInstance(ScanDependenciesAction::class.java)
+    private companion object {
+        const val TOOL_WINDOW_ID = "License Lens"
     }
 }

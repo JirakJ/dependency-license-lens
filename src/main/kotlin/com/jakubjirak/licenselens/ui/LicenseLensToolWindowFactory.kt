@@ -1,21 +1,11 @@
 package com.jakubjirak.licenselens.ui
 
 import com.jakubjirak.licenselens.model.ComplianceReport
-import com.jakubjirak.licenselens.model.ComplianceSummary
-import com.jakubjirak.licenselens.model.LicenseCategory
-import com.jakubjirak.licenselens.model.LicenseRisk
-import com.jakubjirak.licenselens.model.ResolvedDependency
-import com.jakubjirak.licenselens.parser.DependencyParser
-import com.jakubjirak.licenselens.parser.GradleDependencyParser
-import com.jakubjirak.licenselens.parser.MavenDependencyParser
-import com.jakubjirak.licenselens.parser.NpmDependencyParser
-import com.jakubjirak.licenselens.policy.LicensePolicy
-import com.jakubjirak.licenselens.resolver.LicenseResolver
+import com.jakubjirak.licenselens.scan.LicenseScanner
 import com.jakubjirak.licenselens.settings.LicenseLensSettings
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
@@ -42,10 +32,6 @@ class LicenseLensToolWindowFactory : ToolWindowFactory, DumbAware {
         val content = ContentFactory.getInstance().createContent(panel, "Compliance", false)
         toolWindow.contentManager.addContent(content)
     }
-
-    companion object {
-        private val LOG = Logger.getInstance(LicenseLensToolWindowFactory::class.java)
-    }
 }
 
 /**
@@ -58,12 +44,7 @@ class LicenseLensPanel(private val project: Project) : JPanel(BorderLayout()) {
     }
     private val table = JBTable(tableModel)
     private val summaryLabel = JBLabel("No scan results. Click 'Scan' to analyze dependencies.")
-    private val resolver = LicenseResolver()
-    private val parsers: List<DependencyParser> = listOf(
-        GradleDependencyParser(),
-        MavenDependencyParser(),
-        NpmDependencyParser(),
-    )
+    private val scanner = LicenseScanner()
 
     init {
         setupUI()
@@ -84,47 +65,18 @@ class LicenseLensPanel(private val project: Project) : JPanel(BorderLayout()) {
         add(summaryLabel, BorderLayout.SOUTH)
     }
 
-    private fun scanDependencies() {
+    /** Scans the build files in the project root and refreshes the table. */
+    fun scanDependencies() {
         val basePath = project.basePath ?: return
         val baseDir = File(basePath)
-        val settings = LicenseLensSettings.getInstance()
-        val policy = settings.toPolicy()
-        val allDependencies = mutableListOf<com.jakubjirak.licenselens.model.Dependency>()
+        val files = LicenseScanner.BUILD_FILE_NAMES
+            .map { baseDir.resolve(it) }
+            .filter { it.isFile }
+            .map { it.name to it.readText() }
 
-        val buildFiles = listOf(
-            "build.gradle", "build.gradle.kts", "pom.xml", "package.json"
-        )
-
-        for (fileName in buildFiles) {
-            val file = baseDir.resolve(fileName)
-            if (file.exists()) {
-                val parser = parsers.find { it.supports(fileName) } ?: continue
-                val deps = parser.parse(file.readText())
-                allDependencies.addAll(deps)
-            }
-        }
-
-        val resolved = resolver.resolveAll(allDependencies, policy)
-        val issues = policy.evaluate(resolved)
-        val report = ComplianceReport(
-            resolvedDependencies = resolved,
-            issues = issues,
-            summary = buildSummary(resolved),
-        )
-
+        val report = scanner.scan(files, LicenseLensSettings.getInstance().toPolicy())
         updateTable(report)
         LOG.info("License scan completed: ${report.summary.totalDependencies} dependencies, ${report.summary.issueCount} issues")
-    }
-
-    private fun buildSummary(resolved: List<ResolvedDependency>): ComplianceSummary {
-        return ComplianceSummary(
-            totalDependencies = resolved.size,
-            permissiveCount = resolved.count { it.license?.category == LicenseCategory.PERMISSIVE },
-            weakCopyleftCount = resolved.count { it.license?.category == LicenseCategory.WEAK_COPYLEFT },
-            strongCopyleftCount = resolved.count { it.license?.category == LicenseCategory.STRONG_COPYLEFT },
-            unknownCount = resolved.count { it.license == null || it.license.category == LicenseCategory.UNKNOWN },
-            issueCount = resolved.count { it.risk == LicenseRisk.WARNING || it.risk == LicenseRisk.BLOCKED },
-        )
     }
 
     private fun updateTable(report: ComplianceReport) {
