@@ -20,6 +20,12 @@ class MavenDependencyParser : DependencyParser {
         try {
             val factory = DocumentBuilderFactory.newInstance()
             factory.isNamespaceAware = false
+            // pom.xml comes from the opened project: never resolve DTDs or external entities (XXE).
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
+            factory.setFeature("http://xml.org/sax/features/external-general-entities", false)
+            factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false)
+            factory.isExpandEntityReferences = false
+            factory.isXIncludeAware = false
             val builder = factory.newDocumentBuilder()
             val document = builder.parse(org.xml.sax.InputSource(StringReader(content)))
 
@@ -30,8 +36,12 @@ class MavenDependencyParser : DependencyParser {
                     dependencies.add(dep)
                 }
             }
-        } catch (e: Exception) {
+        } catch (e: org.xml.sax.SAXException) {
             LOG.warn("Failed to parse Maven pom.xml", e)
+        } catch (e: java.io.IOException) {
+            LOG.warn("Failed to read Maven pom.xml", e)
+        } catch (e: javax.xml.parsers.ParserConfigurationException) {
+            LOG.warn("XML parser unavailable for pom.xml", e)
         }
 
         LOG.debug("Parsed ${dependencies.size} dependencies from pom.xml")

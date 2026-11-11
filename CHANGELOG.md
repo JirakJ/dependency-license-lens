@@ -1,5 +1,20 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+- The pre-commit check now actually inspects committed build files and asks before committing a dependency whose license is blocked by the policy (it previously always allowed the commit).
+- **Tools → Scan Dependency Licenses** now runs a scan instead of only opening the tool window.
+- Groovy DSL declarations (`implementation 'g:a:v'`, `implementation group: 'g', name: 'a', version: 'v'`) and version-less `group:artifact` declarations are now recognised.
+- `pom.xml` parsing no longer resolves DTDs or external entities (XXE hardening).
+- A malformed entry in `package.json` no longer discards all other npm dependencies.
+
+### Changed
+- Plugin description and README now describe only the features that exist.
+
+### Removed
+- Unused ProGuard obfuscation task and unused git audit helpers.
+
 ## [2026.8.0] - 2026-11-10
 
 ### Changed

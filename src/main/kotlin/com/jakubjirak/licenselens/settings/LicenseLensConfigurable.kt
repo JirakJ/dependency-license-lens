@@ -17,7 +17,7 @@ class LicenseLensConfigurable : BoundConfigurable("Dependency License Lens") {
             row {
                 checkBox("Enable license policy enforcement")
                     .bindSelected(settings::isPolicyEnabled)
-                    .comment("Enforce blocked license rules and show violations in the editor")
+                    .comment("Mark blocked licenses in scan results and ask before committing a build file that declares them")
             }
         }
         group("Blocked Licenses") {

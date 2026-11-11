@@ -1,117 +1,52 @@
 # Dependency License Lens
 
-[![Build](https://github.com/JirakJ/dependency-license-lens/actions/workflows/build.yml/badge.svg)](https://github.com/JirakJ/dependency-license-lens/actions/workflows/build.yml)
-[![Version](https://img.shields.io/badge/version-2026.8.0-blue.svg)](https://github.com/JirakJ/dependency-license-lens/releases)
+[![Plugin Verification](https://github.com/JirakJ/dependency-license-lens/actions/workflows/verify.yml/badge.svg)](https://github.com/JirakJ/dependency-license-lens/actions/workflows/verify.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-> Shows license information for project dependencies directly in the IDE. Parses build files, resolves license info, and flags potentially problematic licenses — compliance without leaving your editor.
+> Lists the dependencies declared in your project's root build files together with their license and a risk rating, so copyleft or policy-blocked licenses are visible before they reach a release.
 
-## ✨ Features
+## Features
 
-- **License scanning** — automatically detect licenses for all dependencies
-- **Inline license hints** — see license type directly in Gradle/Maven build files
-- **Risk indicators** — 🟢 Permissive (MIT, Apache), 🟡 Weak copyleft (LGPL, MPL), 🔴 Strong copyleft (GPL, AGPL)
-- **Gutter icons** — visual indicator for dependencies with license issues
-- **Conflict detection** — detect incompatible licenses (e.g., GPL dependency in an Apache project)
-- **Build file support** — Gradle (Kotlin DSL + Groovy), Maven, npm/yarn/pnpm, pip/poetry, Go modules
-- **License resolution** — from Maven Central POM metadata with local caching
-- **Full SPDX license database** — complete license identification
-- **Compliance dashboard** — tool window with overview of all dependencies and their licenses
-- **License filtering** — filter by license type, risk level, or module
-- **SBOM export** — SPDX and CycloneDX formats
-- **License policy enforcement** — define allowed/denied/review-required license policies
-- **CI integration** — Gradle task: `./gradlew licenseLens --policy=strict --fail-on-violation`
-- **SARIF output** — for GitHub Code Scanning
-- **HTML report** — for legal review
+- **Build file parsing** — `build.gradle.kts` (Kotlin DSL), `build.gradle` (Groovy DSL), `pom.xml` and `package.json` in the project root
+- **Offline license lookup** — a built-in mapping of widely used libraries to SPDX identifiers plus a built-in SPDX database; no network access
+- **Risk levels** — Safe (permissive), Caution (weak copyleft or unknown), Warning (strong copyleft in a commercial project, proprietary), Blocked (license on the policy block list)
+- **License policy** — configurable list of blocked SPDX identifiers (default `GPL-2.0, GPL-3.0, AGPL-3.0`)
+- **Pre-commit check** — with the policy enabled, committing a build file that declares a dependency with a blocked license asks for confirmation first
+- **License Lens tool window** — table of dependencies with version, license, category and risk, plus a summary line
 
-## 📦 Installation
+Dependencies that the built-in mapping does not know are shown as *Unknown* with risk *Caution*.
 
-### From JetBrains Marketplace
-1. Open **Settings** → **Plugins** → **Marketplace**
-2. Search for **"Dependency License Lens"**
-3. Click **Install** and restart the IDE
+## Installation
 
-### From ZIP
-1. Download the latest release from [Releases](https://github.com/JirakJ/dependency-license-lens/releases)
-2. Open **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk**
-3. Select the downloaded ZIP file and restart the IDE
+1. **Settings → Plugins → Marketplace**, search for **Dependency License Lens**, install.
+2. Or download a release ZIP from [Releases](https://github.com/JirakJ/dependency-license-lens/releases) and use **Install Plugin from Disk**.
 
-## 🚀 Quick Start
+## Usage
 
-1. Install the plugin and restart your IDE
-2. Open a project with a `build.gradle.kts`, `build.gradle`, or `pom.xml` file
-3. Go to **Tools → Scan Dependency Licenses** to scan your project
-4. Open any build file — you'll see inline license hints next to each dependency declaration
-5. Open the **License Lens** tool window (bottom panel) for a full compliance overview
-6. Check gutter icons for dependencies flagged with license issues
+1. Open a project with one of the supported build files in its root.
+2. Run **Tools → Scan Dependency Licenses** (or open the **License Lens** tool window and click **Scan Dependencies**).
+3. Review the table; the summary line counts permissive, weak/strong copyleft, unknown and issue dependencies.
 
-## ⚙️ Configuration
+## Configuration
 
-Settings are available at **Settings → Tools → Dependency License Lens**.
+**Settings → Tools → Dependency License Lens**
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| Commercial project | `true` | Flag copyleft licenses as risky (for commercial/proprietary projects) |
-| Enable license policy enforcement | `false` | Block dependencies with denied licenses |
-| Blocked licenses | `GPL-2.0, GPL-3.0, AGPL-3.0` | Comma-separated list of SPDX identifiers to block |
+| Commercial project | `true` | Strong copyleft licenses are rated *Warning* instead of *Caution* |
+| Enable license policy enforcement | `false` | Rates blocked licenses as *Blocked* and enables the pre-commit check |
+| Blocked licenses | `GPL-2.0, GPL-3.0, AGPL-3.0` | Comma-separated SPDX identifiers |
 
-### Team-shared Configuration
+## Requirements
 
-Create a `.license-lens.yaml` in your repository root for shared team settings. Use `// license-lens:ignore` comment on a dependency declaration to suppress warnings for individual dependencies.
+- IntelliJ-based IDE 2023.2 or newer
 
-## 🎯 Usage
-
-### Inline License Hints
-- Open any build file (`build.gradle.kts`, `pom.xml`, `package.json`)
-- License information appears as inlay hints next to each dependency declaration
-- Colors indicate risk level: 🟢 Permissive, 🟡 Weak copyleft, 🔴 Strong copyleft
-
-### Scanning
-- Run **Tools → Scan Dependency Licenses** to scan all project dependencies
-- Results appear in the **License Lens** tool window and as inline hints
-
-### Conflict Detection
-- The plugin automatically detects your project's license from the root `LICENSE` file
-- Incompatible dependency licenses are flagged with inspection warnings
-- Use quick-fix actions to find compatible alternatives
-
-### Compliance Dashboard
-- Open the **License Lens** tool window from the bottom panel
-- View all dependencies grouped by license type and risk level
-- Export SBOM in SPDX or CycloneDX format
-
-## 🔌 Actions
-
-| Action | Location | Description |
-|--------|----------|-------------|
-| Scan Dependency Licenses | Tools menu | Scan project dependencies for license information |
-
-## 📋 Requirements
-
-- IntelliJ IDEA 2024.3+ (or any compatible JetBrains IDE)
-- Java 17+
-- A project with Gradle, Maven, or npm build files
-
-## 🏗️ Building from Source
+## Building from source
 
 ```bash
-git clone https://github.com/JirakJ/dependency-license-lens.git
-cd dependency-license-lens
-./gradlew build
+./gradlew detekt test buildPlugin
 ```
 
-## 📝 License
+## License
 
-Apache License 2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE).
-
-## 👤 Author
-
-**Jakub Jirák** — [@JirakJ](https://github.com/JirakJ)
-
-## Free & open source
-
-Since version 2026.8.0 the plugin is completely free — every feature is unlocked and no license is needed. The source code is open source under the [Apache License 2.0](LICENSE).
-
-## Contributing
-
-Issues and pull requests are welcome at https://github.com/JirakJ/dependency-license-lens.
+Apache License 2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE). The plugin is free; issues and pull requests are welcome at https://github.com/JirakJ/dependency-license-lens.

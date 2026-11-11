@@ -59,11 +59,12 @@ class GradleDependencyParser : DependencyParser {
 
     private fun parseMavenCoordinates(coords: String, scope: String): Dependency? {
         val parts = coords.split(":")
-        if (parts.size < 3) return null
+        if (parts.size < 2 || parts[0].isBlank() || parts[1].isBlank()) return null
+        // "group:artifact" without a version is valid when the version comes from a BOM/platform.
         return Dependency(
             group = parts[0],
             artifact = parts[1],
-            version = parts[2],
+            version = parts.getOrElse(2) { "" },
             scope = scope,
         )
     }
@@ -85,15 +86,18 @@ class GradleDependencyParser : DependencyParser {
 
         private val CONFIGS_PATTERN = CONFIGURATIONS.joinToString("|")
 
+        // Kotlin DSL: implementation("g:a:v")   Groovy DSL: implementation 'g:a:v' or implementation("g:a:v")
         private val STRING_NOTATION_PATTERN = Regex(
-            """(?:$CONFIGS_PATTERN)\s*\(\s*"([^"]+)"\s*\)"""
+            """^(?:$CONFIGS_PATTERN)\s*\(?\s*["']([^"']+)["']"""
         )
 
+        // Kotlin DSL: implementation(group = "g", name = "a", version = "v")
+        // Groovy DSL: implementation group: 'g', name: 'a', version: 'v'
         private val METHOD_NOTATION_PATTERN = Regex(
-            "(?:$CONFIGS_PATTERN)" +
-                """\s*\(\s*group\s*[:=]\s*"([^"]+)"""" +
-                """\s*,\s*name\s*[:=]\s*"([^"]+)"""" +
-                """\s*,\s*version\s*[:=]\s*"([^"]+)"\s*\)"""
+            "^(?:$CONFIGS_PATTERN)" +
+                """\s*\(?\s*group\s*[:=]\s*["']([^"']+)["']""" +
+                """\s*,\s*name\s*[:=]\s*["']([^"']+)["']""" +
+                """\s*,\s*version\s*[:=]\s*["']([^"']+)["']"""
         )
     }
 }
